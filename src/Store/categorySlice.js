@@ -4,18 +4,19 @@ export const categorySlice = createSlice({
   name: 'categories',
   initialState: {
     activeCategory: null,
-    categories: [],
+    allCategories: ['Electronics', 'Food'],
   },
   reducers: {
     setActiveCategory: (state, action) => {
       state.activeCategory = action.payload;
     },
     setCategories: (state, action) => {
-      state.categories = action.payload;
+      state.allCategories = action.payload;
     },
-  }
+    default: state => state,
+  },
 });
 
 export const { setActiveCategory, setCategories } = categorySlice.actions;
-export default categorySlice.reducers;
+export default categorySlice.reducer;
 
