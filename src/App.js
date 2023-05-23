@@ -1,24 +1,35 @@
-import logo from './logo.svg';
 import './App.css';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+import Categories from './Components/Categories';
+import Products from './Components/Products';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#fafafa',
+      main: '#f5f5f5',
+      dark: '#eeeeee',
+      contrastText: '#000',
+    },
+    secondary: {
+      light: '#ffeab0',
+      main: '#ffd147',
+      dark: '#ff9a00',
+      contrastText: '#000',
+    },
+  }
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <Categories />
+      <Products />
+      <Footer />
+    </ThemeProvider>
   );
 }
 
