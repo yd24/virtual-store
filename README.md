@@ -1,6 +1,7 @@
 # E-Commerce App
 
 ## Deployed Site
+https://main--tubular-cascaron-ef8d20.netlify.app/
 
 ## Description
 
