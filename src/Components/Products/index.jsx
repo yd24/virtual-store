@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { setActiveCategory } from '../../Store/productSlice';
+import { useSelector } from 'react-redux';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
