@@ -13,7 +13,6 @@ function Categories(props) {
 
   const setActiveCat = (e) => {
     dispatch(setActiveCategory(e.currentTarget.textContent));
-    dispatch(setProducts(e.currentTarget.textContent));
   };
 
   return (

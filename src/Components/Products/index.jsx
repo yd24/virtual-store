@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
 
 function Products() {
@@ -20,6 +21,11 @@ function Products() {
             <Grid key={idx} item >
               <Card sx={{width: "400px", minHeight: "200px"}}>
                 <CardContent>
+                  <CardMedia
+                    sx={{width: "400px"}}
+                    image='https://placehold.co/400x100/'
+                    title='Placeholder'
+                  />
                   <Typography variant="h6" mb={1}>
                     {product.name}
                   </Typography>

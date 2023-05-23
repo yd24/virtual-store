@@ -38,9 +38,6 @@ export const productSlice = createSlice({
     visibleProducts: initialProducts,
   },
   reducers: {
-    setActiveCategory: (state, action) => {
-      state.visibleProducts = state.allProducts.filter(product => product.category === action.payload);
-    },
     setProducts: (state, action) => {
       state.allProducts = action.payload;
     },
@@ -48,7 +45,16 @@ export const productSlice = createSlice({
       state.visible = state.allProducts;
     },
     default: state => state,
-  }
+  },
+  extraReducers: (builder) => {
+    builder
+    .addMatcher(
+      (action) => action.type.endsWith('/setActiveCategory'),
+      (state, action) => { 
+        state.visibleProducts = state.allProducts.filter(product => product.category === action.payload); 
+      }
+    );
+  },
 });
 
 export const { setActiveCategory, setProducts } = productSlice.actions;
