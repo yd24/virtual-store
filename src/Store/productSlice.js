@@ -12,7 +12,7 @@ const initialProducts = [
     category: 'Electronics',
     name: 'Samsung Galaxy 52',
     description: 'Newest generation Samsung Galaxy phone for cheap, cheap, cheep.',
-    price: 10000000,
+    price: 1000,
     inStock: 15,
   },
   {
