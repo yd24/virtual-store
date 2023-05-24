@@ -9,16 +9,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Categories from '../../Categories';
 import Cart from '../Cart';
 
-import { useDispatch } from 'react-redux';
-import { setActiveCategory } from '../../../Store/categorySlice';
-
 export default function ButtonAppBar() {
   const [show, toggleShow] = React.useState(false);
-  const dispatch = useDispatch();
-  
-  const resetProducts = () => {
-    dispatch(setActiveCategory(null));
-  };
 
   const handleToggle = () => {
     toggleShow(!show);

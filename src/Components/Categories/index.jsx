@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { setActiveCategory } from '../../Store/categorySlice';
-import { useState } from 'react';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
