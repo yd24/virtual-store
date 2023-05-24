@@ -5,6 +5,7 @@ export const cartSlice = createSlice({
   initialState: {
     cartItems: [],
     totalCount: 0,
+    totalPrice: 0,
   },
   reducers: {
     addItem: (state, action) => {
@@ -15,12 +16,14 @@ export const cartSlice = createSlice({
         state.cartItems.push(action.payload);
       }
       state.totalCount = state.totalCount + 1;
+      state.totalPrice = state.totalPrice + action.payload.product.price;
     },
     removeItem: (state, action) => {
-      let index = state.cartItems.findIndex(ele => ele.id === action.payload);
+      let index = state.cartItems.findIndex(ele => ele.id === action.payload.id);
       let count = state.cartItems[index].count;
       state.cartItems.splice(index, 1);
       state.totalCount = state.totalCount - count;
+      state.totalPrice = state.totalPrice - (count * action.payload.product.price);
     },
     default: state => state,
   },

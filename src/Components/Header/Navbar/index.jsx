@@ -39,14 +39,14 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link href='/' onClick={resetProducts} color='inherit' sx={{textDecoration: 'none'}}>
+            <Link href='/' color='inherit' sx={{textDecoration: 'none'}}>
               OUR STORE
             </Link>
           </Typography>
           <Cart />
         </Toolbar>
       </AppBar>
-      <Categories show={show} />
+      <Categories show={show} handleToggle={handleToggle} />
     </Box>
   );
 }

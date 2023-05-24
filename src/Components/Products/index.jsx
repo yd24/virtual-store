@@ -17,7 +17,7 @@ function Products() {
 
   const addProduct = (product, key) => {
     let item = {
-      name: product,
+      product: product,
       id: `${product}-${key}`,
       count: 1,
     };
@@ -56,7 +56,7 @@ function Products() {
                   </Box>
                   {product.inStock > 0
                   &&
-                    <Button sx={{padding: 0, color: 'secondary.dark'}} onClick={() => { addProduct(product.name, idx)}}>Add to Cart</Button>
+                    <Button sx={{padding: 0, color: 'secondary.dark'}} onClick={() => { addProduct(product, idx)}}>Add to Cart</Button>
                   }
                 </CardContent>
               </Card>

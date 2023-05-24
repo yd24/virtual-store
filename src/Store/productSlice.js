@@ -39,11 +39,11 @@ export const productSlice = createSlice({
   },
   reducers: {
     decrementProduct: (state, action) => {
-      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload);
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload.name);
       state.visibleProducts[index].inStock = state.visibleProducts[index].inStock - 1;
     },
     incrementProduct: (state, action) => {
-      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload.name);
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload.product.name);
       state.visibleProducts[index].inStock = state.visibleProducts[index].inStock + action.payload.count;
     },
     default: state => state,
@@ -53,7 +53,7 @@ export const productSlice = createSlice({
     .addMatcher(
       (action) => action.type.endsWith('/setActiveCategory'),
       (state, action) => { 
-        state.visibleProducts = state.allProducts.filter(product => product.category === action.payload); 
+        state.visibleProducts = action.payload ? state.allProducts.filter(product => product.category === action.payload) : state.allProducts; 
       }
     );
   },
