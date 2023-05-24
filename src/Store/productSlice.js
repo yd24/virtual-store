@@ -38,18 +38,26 @@ export const productSlice = createSlice({
     visibleProducts: initialProducts,
   },
   reducers: {
-    setActiveCategory: (state, action) => {
-      state.visibleProducts = state.allProducts.filter(product => product.category === action.payload);
+    decrementProduct: (state, action) => {
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload);
+      state.visibleProducts[index].inStock = state.visibleProducts[index].inStock - 1;
     },
-    setProducts: (state, action) => {
-      state.allProducts = action.payload;
-    },
-    resetProducts: (state) => {
-      state.visible = state.allProducts;
+    incrementProduct: (state, action) => {
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload.name);
+      state.visibleProducts[index].inStock = state.visibleProducts[index].inStock + action.payload.count;
     },
     default: state => state,
-  }
+  },
+  extraReducers: (builder) => {
+    builder
+    .addMatcher(
+      (action) => action.type.endsWith('/setActiveCategory'),
+      (state, action) => { 
+        state.visibleProducts = state.allProducts.filter(product => product.category === action.payload); 
+      }
+    );
+  },
 });
 
-export const { setActiveCategory, setProducts } = productSlice.actions;
+export const { setActiveCategory, decrementProduct, incrementProduct } = productSlice.actions;
 export default productSlice.reducer;
