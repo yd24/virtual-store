@@ -38,11 +38,13 @@ export const productSlice = createSlice({
     visibleProducts: initialProducts,
   },
   reducers: {
-    setProducts: (state, action) => {
-      state.allProducts = action.payload;
+    decrementProduct: (state, action) => {
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload);
+      state.visibleProducts[index].inStock = state.visibleProducts[index].inStock - 1;
     },
-    resetProducts: (state) => {
-      state.visible = state.allProducts;
+    incrementProduct: (state, action) => {
+      let index = state.visibleProducts.findIndex(ele => ele.name === action.payload.name);
+      state.visibleProducts[index].inStock = state.visibleProducts[index].inStock + action.payload.count;
     },
     default: state => state,
   },
@@ -57,5 +59,5 @@ export const productSlice = createSlice({
   },
 });
 
-export const { setActiveCategory, setProducts } = productSlice.actions;
+export const { setActiveCategory, decrementProduct, incrementProduct } = productSlice.actions;
 export default productSlice.reducer;
