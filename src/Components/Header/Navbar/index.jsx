@@ -18,7 +18,7 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar elevation={0} position="static" sx={{backgroundColor: 'white'}}>
+      <AppBar elevation={0} position="fixed" sx={{padding: '0.2em', backgroundColor: 'primary.light'}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -37,8 +37,8 @@ export default function ButtonAppBar() {
           </Typography>
           <Cart />
         </Toolbar>
+        <Categories show={show} handleToggle={handleToggle} />
       </AppBar>
-      <Categories show={show} handleToggle={handleToggle} />
     </Box>
   );
 }

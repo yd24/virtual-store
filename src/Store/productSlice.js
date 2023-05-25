@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { setActiveCategory } from './categorySlice';
+import { toggleCartPending } from './cartSlice';
 
 
 // const initialProducts = [
@@ -52,6 +53,7 @@ export const removeProductStock = createAsyncThunk(
     let data = await response.json();
     await dispatch(fetchProducts());
     dispatch(setActiveCategory());
+    dispatch(toggleCartPending(false));
     return data;
   }
 )

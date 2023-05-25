@@ -35,7 +35,7 @@ function Categories(props) {
   });
 
   return (
-    <Collapse sx={{padding: '1em 3em 1em 3em', backgroundColor: 'primary.light', width: '100vw', position: 'fixed'}}in={props.show}>
+    <Collapse sx={{backgroundColor: 'primary.light'}}in={props.show}>
       <List 
         sx={{
           display: 'flex',
@@ -44,7 +44,9 @@ function Categories(props) {
             color: 'secondary.main'
           },
           '& .MuiList-root': {
-            minWidth: '200px'
+            minWidth: '250px',
+            marginLeft: '4em',
+            paddingBottom: '2em'
           },
           '& .MuiListItem-root': {
             display: 'flex',
