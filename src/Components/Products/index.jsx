@@ -35,7 +35,6 @@ function Products() {
     return capitalized;
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps 
   useEffect(() => {
     dispatch(fetchProducts())
     .unwrap()
@@ -43,6 +42,7 @@ function Products() {
       dispatch(setActiveCategory(activeCat));
       dispatch(toggleLoading(false));
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
