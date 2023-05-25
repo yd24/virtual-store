@@ -6,6 +6,7 @@ export const cartSlice = createSlice({
     cartItems: [],
     totalCount: 0,
     totalPrice: 0,
+    cartPending: false,
   },
   reducers: {
     addItem: (state, action) => {
@@ -26,9 +27,12 @@ export const cartSlice = createSlice({
       state.totalCount = state.totalCount - count;
       state.totalPrice = state.totalPrice - (count * action.payload.product.price);
     },
+    toggleCartPending: (state, action) => {
+      state.cartPending = action.payload;
+    },
     default: state => state,
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, toggleCartPending } = cartSlice.actions;
 export default cartSlice.reducer;
