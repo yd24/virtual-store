@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setActiveCategory } from '../../Store/categorySlice';
+import { setActiveCategory, fetchCategories } from '../../Store/categorySlice';
+import { useEffect } from 'react';
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -12,7 +13,7 @@ function Categories(props) {
 
   const setActiveCat = (e) => {
     toggleSelect(e);
-    dispatch(setActiveCategory(e.currentTarget.textContent));
+    dispatch(setActiveCategory(e.currentTarget.textContent.toLowerCase()));
     props.handleToggle();
   };
 
@@ -29,6 +30,10 @@ function Categories(props) {
     e.currentTarget.classList.add('selected');
   }
 
+  useEffect(() => {
+    dispatch(fetchCategories());
+  });
+
   return (
     <Collapse sx={{padding: '1em 3em 1em 3em', backgroundColor: 'primary.light', width: '100vw', position: 'fixed'}}in={props.show}>
       <List 
@@ -36,10 +41,12 @@ function Categories(props) {
           display: 'flex',
           justifyContent: 'flex-start',
           '& .selected': {
-            color: 'secondary.dark'
+            color: 'secondary.main'
+          },
+          '& .MuiList-root': {
+            minWidth: '200px'
           },
           '& .MuiListItem-root': {
-            maxWidth: '150px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
@@ -47,23 +54,24 @@ function Categories(props) {
           }
         }}
       >
-        <ListItem>
+        <List>
           <Typography mb={2} sx={{fontSize: '16px'}}component='h3'>Categories</Typography>
-          {categories.map((category, idx) => 
-            <ListItem 
+          {categories.map((category, idx) => {
+            let capitalized = category.name.charAt(0).toUpperCase();
+            capitalized = capitalized + category.name.slice(1);
+            return (<ListItem 
               sx={{
                 cursor: 'pointer',
                 fontSize: '14px'
               }} 
               onClick={setActiveCat} 
               key={idx} 
-              value={category}
             >
-              {category}
-            </ListItem>
-          )}
-        </ListItem>
-        <ListItem>
+              {capitalized}
+            </ListItem>);
+          })}
+        </List>
+        <List>
           <Typography mb={2} sx={{fontSize: '16px'}}component='h3'>Other</Typography>
           <ListItem
             sx={{
@@ -74,7 +82,7 @@ function Categories(props) {
           >
             All Products
           </ListItem>
-        </ListItem>
+        </List>
       </List>
     </Collapse>
   );
