@@ -1,10 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
+export const fetchCategories = createAsyncThunk(
+  'categories/fetch', 
+  async (thunkAPI) => {
+    const response = await fetch('https://api-js401.herokuapp.com/api/v1/categories');
+    let data = await response.json();
+    return data.results;
+  }
+)
 
 export const categorySlice = createSlice({
   name: 'categories',
   initialState: {
     activeCategory: null,
-    allCategories: ['Electronics', 'Food'],
+    allCategories: [],
   },
   reducers: {
     setActiveCategory: (state, action) => {
@@ -15,6 +24,12 @@ export const categorySlice = createSlice({
     },
     default: state => state,
   },
+  extraReducers: (builder) => {
+    builder
+    .addCase(fetchCategories.fulfilled, (state, action) => {
+      state.allCategories = action.payload;
+    })
+  }
 });
 
 export const { setActiveCategory, setCategories } = categorySlice.actions;

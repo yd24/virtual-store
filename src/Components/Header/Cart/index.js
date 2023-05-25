@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeItem } from '../../../Store/cartSlice';
-import { incrementProduct } from '../../../Store/productSlice';
+import { returnProductStock } from '../../../Store/productSlice';
 
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
+import Avatar from '@mui/material/Avatar';
 
 function Cart() {
   const [cartAnchor, setCartAnchor] = React.useState(null);
@@ -27,9 +28,9 @@ function Cart() {
     setCartAnchor(null);
   }
 
-  const removeFromCart = (product) => {
-    dispatch(removeItem(product));
-    dispatch(incrementProduct(product));
+  const removeFromCart = (item) => {
+    dispatch(removeItem(item));
+    dispatch(returnProductStock(item));
   }
 
   return (
@@ -57,9 +58,16 @@ function Cart() {
         ?
         cartItems.map((item, idx) => 
           <MenuItem key={idx} sx={{justifyContent: 'space-between', width: '300px', padding: '2em', alignItems: 'flex-start'}}>
-            <Box sx={{display: 'flex', flexDirection: 'column'}}>
-              {item.product.name}
-              <Typography variant='subtitle2' sx={{color: '#3b3b3b', display: 'flex', justifyContent: 'flex-start'}}>{`Quantity: ${item.count}`}</Typography>
+            <Box sx={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+              <Avatar 
+                variant="square"
+                src="https://placehold.co/20x20/"
+                alt="Placeholder"
+              />
+              <Box pl={2} sx={{display: 'flex', flexDirection: 'column'}}>
+                {item.product.name}
+                <Typography variant='subtitle2' sx={{color: '#3b3b3b', display: 'flex', justifyContent: 'flex-start'}}>{`Quantity: ${item.count}`}</Typography>
+              </Box>
             </Box>
             <Typography sx={{padding: '0 0.5em'}} onClick={() => removeFromCart(item)}>X</Typography>
           </MenuItem>
@@ -72,7 +80,7 @@ function Cart() {
         <Divider />
         <MenuItem sx={{justifyContent: 'space-between', fontWeight: 'bold'}}>
           <Typography sx={{color: 'secondary.dark'}}>View Cart</Typography>
-          Total: ${cartTotal}.00
+          Total: ${cartTotal.toFixed(2)}
         </MenuItem>
       </Menu>
     </> 
