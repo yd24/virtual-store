@@ -35,6 +35,7 @@ function Products() {
     return capitalized;
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
   useEffect(() => {
     dispatch(fetchProducts())
     .unwrap()

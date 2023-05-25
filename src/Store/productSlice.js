@@ -52,6 +52,7 @@ export const removeProductStock = createAsyncThunk(
     let data = await response.json();
     await dispatch(fetchProducts());
     dispatch(setActiveCategory());
+    return data;
   }
 )
 
@@ -65,6 +66,7 @@ export const returnProductStock = createAsyncThunk(
     let data = await response.json();
     await dispatch(fetchProducts());
     dispatch(setActiveCategory());
+    return data;
   }
 )
 
